@@ -16,43 +16,34 @@ async def greet_user(client, message):
 @app.on_message(filters.text)
 async def check_message(client, message):
     # Extract message content
-      text = message.text
+    text = message.text
 
     # Check for required parameters (ch and id)
-      if "ch=" not in text or "id=" not in text:
-      await message.reply("Invalid link. Please provide parameters in the format 'ch=VALUE&id=VALUE'.")
-      return
+    if "ch=" not in text or "id=" not in text:
+        await message.reply("Invalid link. Please provide parameters in the format 'ch=VALUE&id=VALUE'.")
+        return
 
     # Extract parameters using dictionary comprehension
-      params = {part.split("=")[0]: part.split("=")[1] for part in text.split("&")}
+    params = {part.split("=")[0]: part.split("=")[1] for part in text.split("&")}
 
-      try:
-      ch = params["ch"]
-      id_value = params["id"]
+    try:
+        ch = params["ch"]
+        id_value = params["id"]
 
-    # Process the parameters (replace with your actual logic)
-                                                                                        # ... (e.g., validate data, perform actions)
+        # Process the parameters (replace with your actual logic)
+        # ... (e.g., validate data, perform actions)
 
-                                                                                                # If parameters are valid, send a button with the provided URL
-                                                                                                        button_text = "Good"
-                                                                                                                button_url = "https://www.google.com"  # Replace with your desired URL
-                                                                                                                        await message.reply(
-                                                                                                                                    f"Parameters processed successfully! Click the button below:",
-                                                                                                                                                reply_markup=client.InlineKeyboardMarkup(
-                                                                                                                                                                [[client.InlineKeyboardButton(button_text, url=button_url)]]
-                                                                                                                                                                            ),
-                                                                                                                                                                                    )
-                                                                                                                                                                                        except KeyError:
-                                                                                                                                                                                                # Handle missing parameters
-                                                                                                                                                                                                        await message.reply("Invalid link. Please ensure both 'ch' and 'id' parameters are present.")
+        # If parameters are valid, send a button with the provided URL
+        button_text = "Good"
+        button_url = "https://www.google.com"  # Replace with your desired URL
+        await message.reply(
+            f"Parameters processed successfully! Click the button below:",
+            reply_markup=client.InlineKeyboardMarkup(
+                [[client.InlineKeyboardButton(button_text, url=button_url)]]
+            ),
+        )
+    except KeyError:
+        # Handle missing parameters
+        await message.reply("Invalid link. Please ensure both 'ch' and 'id' parameters are present.")
 
-                                                                                                                                                                                                        app.run()
-                                                                
-
-
-       
-        
-        
-        
-               
-
+app.run()
